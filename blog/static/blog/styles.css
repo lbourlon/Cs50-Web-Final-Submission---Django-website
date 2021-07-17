@@ -1,0 +1,128 @@
+html{
+    height:100%;
+    width:fit-content;
+    font-family:"Times",'Trebuchet MS', 'Lucida Sans Unicode'!important;
+}
+
+
+body {
+    width:auto;
+    min-width: 490px;
+    height: 100%;
+    background-color: rgb(197, 197, 197);
+}
+
+a {
+    cursor:pointer ;
+}
+    
+.body {
+    height: inherit;
+    background-color: rgb(255, 250, 245);
+    /* background-color: white; */
+    margin:5px;
+}
+
+
+.second-background {
+    min-height: auto;
+    height: fit-content;
+    background-color: rgb(0, 134, 7);
+    padding: 5px;
+}
+
+
+.header{
+    padding:0.1cm;
+    margin:0cm;
+    height:fit-content;
+    background-color: rgb(255, 250, 245);
+    flex-wrap: nowrap;
+}
+
+.left-box{
+    float:left;
+    width:clamp(80px, 25vw, 250px);
+    height:clamp(80px, 25vw, 250px);
+    padding:0;
+    background-color: inherit;
+    /* background-color:rgb(255, 146, 29);  */
+}
+
+
+
+.right-box{
+    flex-grow: 1;
+    height:clamp(80px, 25vw, 250px);
+    float:left;
+    display:flex;
+    /* border: 1px solid #000000; */
+    margin:0;
+    padding: 1cm;
+    align-items: center;
+    text-align: center;
+    font-size: clamp(20px, 9vw, 90px);
+    font-family: "times";
+}
+
+.author-info{
+    text-align: left;
+}
+
+.article-preview {
+    float: left;
+    max-height: 7cm;
+    /* background-color: inherit; */
+    width:100%;
+    margin-top:5px;
+    padding:3px;
+    
+}
+
+.article-preview-body {
+    text-align: justify;
+    overflow: hidden;
+}
+
+.preview-title {
+    cursor: pointer;
+    font-size: clamp(20px, 2vw, 32px);
+    font-weight: bold;
+
+}
+
+.pagination-div{
+    padding:0.2cm;
+    margin:0.2cm;
+    width:100%;
+}
+
+.recommendation{
+    float: block;
+    width: clamp(200px, 15vw, 300px);
+    height:fit-content;
+    margin:0.5mm;
+    flex-wrap: nowrap;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+.small_image{
+    float:left;
+    width: clamp(80px, 15vw, 100px);
+    height:  clamp(80px, 15vw, 100px);
+    padding : 0;
+}
+
+.recom_title{
+    flex:1;
+    float:left;
+    display:flex;
+    /* width: calc(max-content -clamp(80px, 15vw, 100px)); */
+    height:  clamp(80px, 15vw, 100px);
+    align-items: center;
+    text-align: center;
+    
+}

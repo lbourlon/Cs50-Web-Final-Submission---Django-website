@@ -1,0 +1,129 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "UTF-8">
+        <title>{% block title %}Coletivo Amador{% endblock %}</title>
+
+        <!-- Bootsrap Things-->
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+        {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> {% endcomment %}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+        <!-- Other styling -->
+        <link href="{% static 'blog/styles.css' %}" rel="stylesheet">
+        <link href="{% static 'blog/bootstrap_changes.css' %}" rel="stylesheet">
+
+        <!-- For any javascript the pages may hold -->
+        {% block head %}
+        {% endblock head %}        
+
+    </head>
+
+<body>
+
+    <!--==============================  Navbar ==============================-->
+    <nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url "index" %}">ColetivoAmador</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "logout" %}">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "login" %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url "register" %}">Register</a>
+                </li>
+            {% endif %}
+
+            
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Category
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for category in categories %}
+                    <li><a id = "{{ category }}" style = "cursor:pointer" class="category-selector dropdown-item">{{ category }}</a></li> 
+                {% endfor %}
+            </ul>
+            </li>
+
+            {% if user.groups.all.first.name == 'Authors' or user.is_superuser%}
+                <li class="nav-item">
+                <a class="nav-link" href="/admin">Admin site</a>
+                </li>
+            {% endif %}
+
+            {% if user.is_authenticated  %}
+                <li>
+                    <a id = "subscribe" class="nav-link">Newsletter</a>
+                </li>
+            {% endif %}
+
+
+        </ul>
+
+        <form class="d-flex ml-auto">
+            <input id = "search-input" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button id = "search-button" class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        </div>
+    </div>
+    </nav>
+
+
+        <!-- Background and header-->
+        <div class = "container second-background">
+            {% block heading %}
+            
+            {% endblock heading %}
+            
+            <div class = "body container">
+
+                <div class= "row">
+                 
+                    <div class = 'col-lg-3'>
+                        <div class = "row" style="cursor:pointer;">
+                            <div id="prev1" class = "col border border-light">
+                                <h5 class="underline recommendation">Most visited of the week</h5>
+                                <div class="row recommendation">
+                                    <img class = "small_image border rounded border-dark" src="{{ article_of_the_week.lead_image.url }}" alt="Article of The week image.">
+                                    <span id="art_title" class = 'recom_title'>{{ article_of_the_week.title}}</span>
+                                    <span id = "art_id" style="display:none">{{ article_of_the_week.id }}</span>
+                                </div>
+                            </div>
+
+                            <div id="prev2" class = "col border border-light">
+                                <h5 class="underline recommendation" >Music Recommendation</h5>
+                                <div class="row recommendation">
+                                    <img class = "small_image border rounded border-dark" src="{{ music_recom.lead_image.url }}" alt="Music recommendation of the week image.">
+                                    <span id = "music_title" class="recom_title">{{ music_recom.title}}</span>
+                                    <span id = "music_id" style="display:none;">{{ music_recom.id }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    
+                        {% block side %}{% endblock side %}
+                    
+                    </div>
+                    <div class = 'col-lg-9'>{% block body %}{% endblock %}</div>
+                </div>
+        
+                {% block footer %}{% endblock footer %}
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,65 @@
+{% extends "blog/layout.html" %}
+{% load static %}
+
+{% block head %}
+    <script type="text/javascript" src="{% static 'blog/index.js' %}"></script>
+{% endblock head %}    
+
+
+
+
+{% block heading %}
+        <div class= "header row">
+            <img class = "left-box" src="{% static 'images/ca_logo.png' %}" alt="image here">
+            <div class = 'right-box'>
+                <div class="big-title" style="color:dark-grey;">Coletivo Amador</div>
+                {% comment %} <div>Amador</div> {% endcomment %}
+            </div> 
+        </div> 
+{% endblock heading %}
+
+
+<!-- Where the articles will be dynamycally loaded -->
+{% block body %}
+    <div id="single_article" style="display:none;" >
+
+        <h1 id = "article_title"></h1>
+        <div id = "article_body" class ="article"></div>
+
+        <div class = "ml-auto" >
+            <span id='article_author'></span>
+            <p id='article_pub_date'></p>
+        </div>
+
+    </div>
+
+    <div id="article_list">
+        <p id = "search_message_master" style="display:none;"><span id = "search_message"></span> for "<span id="search_string"></span>", click <a href= {% url "index" %}> here</a> to go back</p>
+        <div class = "article-list" id ='articles'></div>
+    </div>
+{% endblock %}
+
+
+<!-- Smaller recommendations and such-->
+{% block side %}
+
+
+{% endblock side %}
+
+
+<!-- Footer of the index page, here just the pagination -->
+{% block footer %}
+
+<div id = "paginator" class = "pagination-div">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li><a class="page-link"  id = "previous-page"><button type = "button" class="page-item btn btn-primary">Previous</button></a></li>
+            <li><a class="page-link" id ="home-page"><button type = "button" class="btn btn-primary">Home</button></li></a>
+            <li><a class="page-link" id = "next-page"><button type = "button" class="btn btn-primary">Next</button></li></a>
+        </ul>
+    </nav>
+
+</div>
+
+{% endblock footer %}
+

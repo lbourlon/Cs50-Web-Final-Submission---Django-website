@@ -1,0 +1,17 @@
+{% extends "blog/layout.html"%}
+{% load static %}
+
+
+
+
+{% block body %}
+    <h1>{{ article.title }}</h1>
+    <div class ="article">
+        {{ article.body | safe }}
+    </div>
+
+    <div class = "ml-auto" >
+        <span >by : {{ article.author }}</span>
+        <p>On : {{ article.pub_date}}</p>
+    </div>
+{% endblock body %}
